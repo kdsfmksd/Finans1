@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alpha Finance Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="app-body">
+    <div class="app-container">
+        <header class="system-header">
+            <div class="theme-control">
+                <input type="color" id="bg-picker" value="#000000">
+                <span>ЦВЕТ ФОНА</span>
+            </div>
+            <div id="clock">20:00</div>
+        </header>
+
+        <section id="page-main" class="page active">
+            <div class="hero-card">
+                <p>ВСЕГО ДЕНЕГ</p>
+                <h1 id="total-balance">0 ₽</h1>
+            </div>
+
+            <div class="stats-vertical">
+                <div class="stat-item"><span>ЛИМИТ В ДЕНЬ</span><b id="day-limit">0 ₽</b></div>
+                <div class="stat-item"><span>ОТЛОЖЕНО В ЦЕЛЬ</span><b id="saved-in-goal">0 ₽</b></div>
+                <div class="stat-item"><span>ИНВЕСТ-ПОТЕНЦИАЛ</span><b id="can-invest">0 ₽</b></div>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="main-input" placeholder="Сумма" inputmode="decimal">
+                <div class="main-actions">
+                    <button class="btn-inc" onclick="addIncome()">+ ДОХОД</button>
+                    <button class="btn-exp" onclick="addExpense()">- ТРАТА</button>
+                </div>
+                <input type="text" id="exp-name" placeholder="Название траты">
+            </div>
+
+            <div class="history-list" id="history-list"></div>
+        </section>
+
+        <section id="page-save" class="page">
+            <div class="goal-header">
+                <div class="circle-box">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" class="ring-bg"></circle>
+                        <circle id="goal-ring" cx="50" cy="50" r="45" class="ring-active"></circle>
+                    </svg>
+                    <div class="circle-text">
+                        <span id="goal-percent">0%</span>
+                        <small id="goal-current-val">0 ₽</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="goal-config">
+                <div class="photo-upload" onclick="document.getElementById('goal-file').click()">
+                    <input type="file" id="goal-file" hidden accept="image/*">
+                    <div id="photo-preview">ФОТО ЦЕЛИ</div>
+                </div>
+                <input type="text" id="target-name" placeholder="НАЗВАНИЕ ЦЕЛИ">
+                <input type="number" id="target-sum" placeholder="СУММА ЦЕЛИ">
+                <input type="date" id="target-date">
+                <button class="btn-setup" onclick="setGoal()">ОБНОВИТЬ ПАРАМЕТРЫ</button>
+            </div>
+
+            <div class="goal-management">
+                <input type="number" id="goal-action-amount" placeholder="Сумма операции">
+                <div class="main-actions">
+                    <button class="btn-inc" onclick="transferToGoal()">ВЛОЖИТЬ</button>
+                    <button class="btn-exp" onclick="transferFromGoal()">ВЫЛОЖИТЬ</button>
+                </div>
+            </div>
+
+            <div id="goal-info-card" class="stat-card">
+                <p>НУЖНО В МЕСЯЦ:</p>
+                <h2 id="monthly-pay">0 ₽</h2>
+            </div>
+        </section>
+
+        <section id="page-invest" class="page">
+            <button class="alfa-app-btn" onclick="window.location.href='https://invest.alfabank.ru/'">АЛЬФА ИНВЕСТИЦИИ</button>
+            <div class="chart-box">
+                <iframe src="https://s.tradingview.com/widgetembed/?symbol=MOEX%3ASBER&theme=dark" width="100%" height="280" frameborder="0"></iframe>
+            </div>
+            <div class="goal-management">
+    <input type="number" id="invest-amount" placeholder="СУММА ИНВЕСТИЦИИ">
+    <button class="btn-inc" onclick="doInvest()">ИНВЕСТИРОВАТЬ</button>
+</div>
+            <div class="news-feed">
+                <div class="news-card">Газпром: ожидается рост дивидендов в 2026 году.</div>
+                <div class="news-card">Рынок акций РФ перешел в фазу активного роста.</div>
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="showPage('main', this)">ГЛАВНАЯ</button>
+            <button class="nav-item" onclick="showPage('save', this)">КОПИТЬ</button>
+            <button class="nav-item" onclick="showPage('invest', this)">ИНВЕСТ</button>
+        </nav>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
